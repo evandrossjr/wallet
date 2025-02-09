@@ -28,11 +28,11 @@ public class PaymentMethod implements Serializable{
 		this.id_payment_method = id_payment_method;
 	}
 
-	public String getName_tag() {
+	public String getName() {
 		return name_payment_method;
 	}
 
-	public void setName_tag(String name_payment_method) {
+	public void setName(String name_payment_method) {
 		this.name_payment_method = name_payment_method;
 	}
 

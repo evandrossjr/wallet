@@ -16,7 +16,7 @@ public class Expense implements Serializable{
 	private Integer parcels;
 	private PaymentMethod payment_method;
 	private Category category;
-	private List<Tag> tags;
+	
 	
 	
 	public Expense() {
@@ -34,7 +34,7 @@ public class Expense implements Serializable{
 		this.parcels = parcels;
 		this.payment_method = payment_method;
 		this.category = category;
-		this.tags = tags;
+		
 	}
 
 
@@ -108,15 +108,6 @@ public class Expense implements Serializable{
 	}
 
 
-	public List<Tag> getTags() {
-		return tags;
-	}
-
-
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -141,7 +132,7 @@ public class Expense implements Serializable{
 	public String toString() {
 		return "Expense [id_expense=" + id_expense + ", name=" + name + ", expenseDate=" + expenseDate
 				+ ", value_expense=" + value_expense + ", parcels=" + parcels + ", payment_method=" + payment_method
-				+ ", category=" + category + ", tags=" + tags + "]";
+				+ ", category=" + category + "]";
 	}
 
 	
