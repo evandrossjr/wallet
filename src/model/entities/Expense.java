@@ -25,7 +25,7 @@ public class Expense implements Serializable{
 
 
 	public Expense(Integer id_expense, String name, Date expenseDate, Double value_expense, Integer parcels,
-			PaymentMethod payment_method, Category category, List<Tag> tags) {
+			PaymentMethod payment_method, Category category) {
 		super();
 		this.id_expense = id_expense;
 		this.name = name;

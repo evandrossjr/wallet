@@ -1,10 +1,12 @@
 package model.dao.impl;
 
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,7 +32,48 @@ public class ExpenseDaoJDBC implements ExpenseDao{
 
 	@Override
 	public void insert(Expense obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(""
+					+ "INSERT INTO expense \r\n"
+					+ "(name_expense, date, value_expense, parcels_expense, id_category, id_payment_method) \r\n"
+					+ "VALUES \r\n"
+					+ "(?, ? , ?, ?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			
+			st.setString(1, obj.getName());
+			st.setDate(2, new java.sql.Date(obj.getExpenseDate().getTime()));
+			st.setDouble(3, obj.getValue_expense());
+			st.setInt(4, obj.getParcels());
+			st.setInt(5, obj.getCategory().getId_category());
+			st.setInt(6, obj.getPayment_method().getId());
+			
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if(rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					obj.setId_expense(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Unexpected Error! No rows affected");
+			}
+		}
+		catch (SQLException e){
+			throw new DbException(e.getMessage());
+			
+		}	
+		finally {
+			DB.closeStatement(st);
+		}
+			
+		
 		
 	}
 
