@@ -1,5 +1,5 @@
 package model.dao.impl;
 
-public class TAgDaoJDBC {
+public class TagDaoJDBC {
 
 }

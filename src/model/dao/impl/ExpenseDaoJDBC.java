@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
@@ -110,8 +113,62 @@ public class ExpenseDaoJDBC implements ExpenseDao{
 
 	@Override
 	public List<Expense> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			st = conn.prepareStatement(
+					"SELECT expense.*, category.name_category as CatName, payment_method.name_payment_method as payName \r\n"
+					+ "FROM expense \r\n"
+					+ "INNER JOIN category ON expense.id_category = category.id_category\r\n"
+					+ "INNER JOIN payment_method ON expense.id_payment_method = payment_method.id_payment_method \r\n"
+					+ "ORDER BY date");
+			
+			
+			rs = st.executeQuery();
+			
+			List<Expense> list = new ArrayList<>();
+			Map<Integer, Category> map = new HashMap<>();
+			Map<Integer, PaymentMethod> map2 = new HashMap<>();
+			
+			
+			while (rs.next()) {
+				
+				Category category = map.get(rs.getInt("id_category"));
+				
+				if(category == null) {
+					category = instantiateCategory(rs);
+					map.put(rs.getInt("id_category"), category);
+					
+				}
+				
+				
+				PaymentMethod paymentMethod = map2.get(rs.getInt("id_payment_method"));
+				
+				if(paymentMethod == null) {
+					paymentMethod = instantiatePaymentMethod(rs);
+					map2.put(rs.getInt("id_payment_method"), paymentMethod);
+					
+				}
+				
+				Expense obj = instantiateExpense(rs, paymentMethod, category);
+				list.add(obj);
+				
+				
+				
+			}
+			return list;
+		}
+		catch (SQLException e){
+			throw new DbException(e.getMessage());
+			
+		}	
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
