@@ -2,13 +2,13 @@ package model.dao;
 
 import java.util.List;
 
-import model.entities.Expense;
+import model.entities.Category;
 
 public interface CategoryDao {
-	void insert(Expense obj);
-	void update(Expense obj);
+	void insert(Category obj);
+	void update(Category obj);
 	void deleteById(Integer id);
-	Expense findById(Integer id);
-	List<Expense> findAll();
+	Category findById(Integer id);
+	List<Category> findAll();
 
 }
