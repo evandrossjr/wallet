@@ -1,5 +1,7 @@
 package application;
 
+import java.util.List;
+
 import model.dao.CategoryDao;
 import model.dao.DaoFactory;
 import model.entities.Category;
@@ -15,7 +17,13 @@ public class Program2 {
 		
 		System.out.println(category);
 		
+		System.out.println("==== TEST 2: expense findAl() ====");
 		
+		
+		List<Category> list = categoryDao.findAll();
+		for (Category category1 : list) {
+			System.out.println(category1);
+		}
 	}
 
 }
