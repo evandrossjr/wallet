@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,43 @@ private Connection conn;
 
 		@Override
 		public void insert(Category obj) {
-			// TODO Auto-generated method stub
+			PreparedStatement st = null;
+			
+			try {
+				st = conn.prepareStatement(""
+						+ "INSERT INTO category \r\n"
+						+ "(name_category) \r\n"
+						+ "VALUES \r\n"
+						+ "(?)",
+						Statement.RETURN_GENERATED_KEYS);
+				
+				
+				st.setString(1, obj.getName_category());
+			
+				
+				
+				int rowsAffected = st.executeUpdate();
+				
+				if(rowsAffected > 0) {
+					ResultSet rs = st.getGeneratedKeys();
+					if(rs.next()) {
+						int id = rs.getInt(1);
+						obj.setId_category(id);
+					}
+					DB.closeResultSet(rs);
+				}
+				else {
+					throw new DbException("Unexpected Error! No rows affected");
+				}
+			}
+			catch (SQLException e){
+				throw new DbException(e.getMessage());
+				
+			}	
+			finally {
+				DB.closeStatement(st);
+			}
+				
 			
 		}
 
@@ -37,7 +74,22 @@ private Connection conn;
 
 		@Override
 		public void deleteById(Integer id) {
-			// TODO Auto-generated method stub
+			PreparedStatement st = null;
+			
+			try {
+				st = conn.prepareStatement("DELETE FROM category WHERE id_category = ?");
+				
+				st.setInt(1, id);
+				
+				st.executeUpdate();		
+				
+			}
+			catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+			finally {
+				DB.closeStatement(st);
+			}
 			
 		}
 
