@@ -29,15 +29,21 @@ public class Program2 {
 		
 		
 		
-		System.out.println("==== TEST 5: expense insert ====");
-		Category newCategory = new Category(null, "Jogos");
+		System.out.println("==== TEST 3: expense insert ====");
+		Category newCategory = new Category(null, "Pet");
 		categoryDao.insert(newCategory);
 		System.out.println("Inserted New in: " + newCategory.getName_category());
 		
 		
-		System.out.println("==== TEST 6: expense delete ====");
+		System.out.println("==== TEST 4: expense delete ====");
 		categoryDao.deleteById(4);
 		System.out.println("Deleted!");
+		
+		System.out.println("==== TEST 5: expense update ====");
+		category = categoryDao.findById(5);
+		category.setName_category("Home office");
+		categoryDao.update(category);
+		System.out.println("Update completed");
 	}
 
 }

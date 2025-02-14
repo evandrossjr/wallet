@@ -57,7 +57,7 @@ public class Program {
 		System.out.println("Deleted!");
 		
 		
-		System.out.println("==== TEST 6: expense delete ====");
+		System.out.println("==== TEST 6: expense update ====");
 		expense = expenseDao.findById(5);
 		expense.setName("café alterado");
 		expenseDao.update(expense);

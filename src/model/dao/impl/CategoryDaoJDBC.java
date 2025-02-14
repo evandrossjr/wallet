@@ -67,7 +67,29 @@ private Connection conn;
 
 		@Override
 		public void update(Category obj) {
-			// TODO Auto-generated method stub
+			PreparedStatement st = null;
+
+			try {
+				st = conn.prepareStatement(
+						"UPDATE category "
+						+ "SET name_category = ? "
+						+ "WHERE  id_category = ? ",
+						Statement.RETURN_GENERATED_KEYS);
+				
+				
+				st.setString(1, obj.getName_category());
+				st.setInt(2, obj.getId_category());
+				
+				st.executeUpdate();
+				
+			} 
+			catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
+			finally {
+				DB.closeStatement(st);
+			}
+			
 			
 		}
 
