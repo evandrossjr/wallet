@@ -79,7 +79,33 @@ public class ExpenseDaoJDBC implements ExpenseDao{
 
 	@Override
 	public void update(Expense obj) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"UPDATE expense "
+					+ "SET name_expense = ?, date = ?, value_expense = ? , parcels_expense = ?, id_category = ?, id_payment_method = ? "
+					+ "WHERE  id_expense = ? ",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			
+			st.setString(1, obj.getName());
+			st.setDate(2, new java.sql.Date(obj.getExpenseDate().getTime()));
+			st.setDouble(3, obj.getValue_expense());
+			st.setInt(4, obj.getParcels());
+			st.setInt(5, obj.getCategory().getId_category());
+			st.setInt(6, obj.getPayment_method().getId());
+			st.setInt(7, obj.getId_expense());
+			
+			st.executeUpdate();
+			
+		} 
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 
