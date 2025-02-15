@@ -1,23 +1,31 @@
 package application;
 
-import java.util.Date;
 import java.util.List;
 
 import model.dao.CategoryDao;
 import model.dao.DaoFactory;
+import model.dao.PaymentMethodDao;
 import model.entities.Category;
-import model.entities.Expense;
+import model.entities.PaymentMethod;
 
 public class Program2 {
 
 	public static void main(String[] args) {
 
 		CategoryDao categoryDao = DaoFactory.createCategoryDao();
+		PaymentMethodDao paymentMethodDao = DaoFactory.createPaymentMethodDao();
 		
-		System.out.println("==== TEST 1: expense findById ====");
+		System.out.println("==== TEST 1: findById ====");
+		System.out.println("category");
 		Category category = categoryDao.findById(3);
-		
 		System.out.println(category);
+		
+		System.out.println("payment method");
+		PaymentMethod paymentMethod = paymentMethodDao.findById(1);
+		System.out.println(paymentMethod);
+		
+		
+		
 		
 		System.out.println("==== TEST 2: expense findAl() ====");
 		

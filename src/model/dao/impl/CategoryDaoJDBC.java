@@ -14,7 +14,7 @@ import model.dao.CategoryDao;
 import model.entities.Category;
 
 public class CategoryDaoJDBC implements CategoryDao{
-private Connection conn;
+	private Connection conn;
 	
 	public CategoryDaoJDBC(Connection conn) {
 		this.conn = conn;
