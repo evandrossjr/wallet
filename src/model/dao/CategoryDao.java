@@ -9,6 +9,7 @@ public interface CategoryDao {
 	void update(Category category);
 	void deleteById(Integer id);
 	Category findById(Integer id);
+	Category findByName(String name);
 	List<Category> findAll();
 
 }

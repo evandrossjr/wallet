@@ -24,6 +24,10 @@ public class Program2 {
 		PaymentMethod paymentMethod = paymentMethodDao.findById(1);
 		System.out.println(paymentMethod);
 		
+		System.out.println("==== TEST 1.1: findByName ====");
+		Category category2 = categoryDao.findByName("Lazer");
+		System.out.println(category2);
+		
 		
 		System.out.println("==== TEST 2: findAl() ====");
 		System.out.println("category");

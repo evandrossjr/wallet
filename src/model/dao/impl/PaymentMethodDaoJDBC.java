@@ -179,4 +179,34 @@ public class PaymentMethodDaoJDBC implements PaymentMethodDao{
 	
 	}
 
+	@Override
+	public PaymentMethod findByName(String name) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			st = conn.prepareStatement(""
+					+ "SELECT * FROM payment_method WHERE payment_method.name_payment_method = ?");
+			
+			st.setString(1, name);
+			
+			rs = st.executeQuery();
+			
+			if(rs.next()) {
+				PaymentMethod paymentMethod = instantiatePaymentMethod(rs);
+				return paymentMethod;
+			}
+			return null;
+			
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
 }

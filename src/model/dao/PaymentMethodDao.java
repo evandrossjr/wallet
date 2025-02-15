@@ -10,6 +10,7 @@ public interface PaymentMethodDao {
 	void update(PaymentMethod paymentMethod);
 	void deleteById(Integer id);
 	PaymentMethod findById(Integer id);
+	PaymentMethod findByName(String name);
 	List<PaymentMethod> findAll();
 
 
