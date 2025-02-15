@@ -39,7 +39,6 @@ public class Program2 {
 		}
 		
 		
-		
 		System.out.println("==== TEST 3: insert ====");
 		System.out.println("category");
 		Category newCategory = new Category(null, "Pet");
@@ -47,6 +46,10 @@ public class Program2 {
 		System.out.println("Inserted New in: " + newCategory.getName_category());
 		
 		System.out.println("payment method");
+		PaymentMethod newPaymentMethod = new PaymentMethod(null, "Pix"); 
+		paymentMethodDao.insert(newPaymentMethod);
+		System.out.println("Inserted New in: " + newPaymentMethod.getName());
+
 		
 		System.out.println("==== TEST 4: delete ====");
 		System.out.println("category");
