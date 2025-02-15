@@ -66,7 +66,27 @@ public class PaymentMethodDaoJDBC implements PaymentMethodDao{
 
 	@Override
 	public void update(PaymentMethod paymentMethod) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+
+		try {
+			st = conn.prepareStatement(
+					"UPDATE payment_method "
+					+ "SET name_payment_method = ? "
+					+ "WHERE  id_payment_method = ? ",
+					Statement.RETURN_GENERATED_KEYS);
+			
+			
+			st.setString(1, paymentMethod.getName());
+			st.setInt(2, paymentMethod.getId());
+			st.executeUpdate();
+			
+		} 
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 

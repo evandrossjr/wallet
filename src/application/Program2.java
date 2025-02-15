@@ -47,7 +47,7 @@ public class Program2 {
 		
 		System.out.println("payment method");
 		PaymentMethod newPaymentMethod = new PaymentMethod(null, "Financiamento"); 
-		paymentMethodDao.insert(newPaymentMethod);
+		//paymentMethodDao.insert(newPaymentMethod);
 		System.out.println("Inserted New in: " + newPaymentMethod.getName());
 
 		
@@ -68,6 +68,10 @@ public class Program2 {
 		System.out.println("Update completed");
 		
 		System.out.println("payment method");
+		paymentMethod = paymentMethodDao.findById(5);
+		paymentMethod.setName("pix à vista");
+		paymentMethodDao.update(paymentMethod);
+		System.out.println("Update Completed");
 	}
 
 }
