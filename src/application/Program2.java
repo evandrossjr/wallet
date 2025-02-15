@@ -46,7 +46,7 @@ public class Program2 {
 		System.out.println("Inserted New in: " + newCategory.getName_category());
 		
 		System.out.println("payment method");
-		PaymentMethod newPaymentMethod = new PaymentMethod(null, "Pix"); 
+		PaymentMethod newPaymentMethod = new PaymentMethod(null, "Financiamento"); 
 		paymentMethodDao.insert(newPaymentMethod);
 		System.out.println("Inserted New in: " + newPaymentMethod.getName());
 
@@ -57,6 +57,8 @@ public class Program2 {
 		System.out.println("Deleted!");
 		
 		System.out.println("payment method");
+		//paymentMethodDao.deleteById(4);
+		System.out.println("Deleted!");
 		
 		System.out.println("==== TEST 5: update ====");
 		System.out.println("category");
