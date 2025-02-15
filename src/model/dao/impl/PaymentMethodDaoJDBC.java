@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
 import db.DbException;
 import model.dao.PaymentMethodDao;
+import model.entities.Category;
 import model.entities.PaymentMethod;
 
 public class PaymentMethodDaoJDBC implements PaymentMethodDao{
@@ -79,8 +81,31 @@ public class PaymentMethodDaoJDBC implements PaymentMethodDao{
 
 	@Override
 	public List<PaymentMethod> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.prepareStatement("SELECT * FROM payment_method ORDER BY id_payment_method");
+			
+			rs = st.executeQuery();
+			
+			
+			List<PaymentMethod> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				PaymentMethod paymentMethod  = instantiatePaymentMethod(rs);
+				list.add(paymentMethod);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	
 	}
 
 }
