@@ -48,19 +48,20 @@ public class Program {
 		
 		System.out.println("==== TEST 5: expense insert ====");
 		Expense newExpense = new Expense(null, "Café de rico", new Date(), 219.0, 2, paymentoMethod, category);
-		expenseDao.insert(newExpense);
+		//expenseDao.insert(newExpense);
 		System.out.println("Inserted New in: " + newExpense.getName());
 		
 		
 		System.out.println("==== TEST 6: expense delete ====");
-		expenseDao.deleteById(3);
+		expenseDao.deleteById(5);
+		
 		System.out.println("Deleted!");
 		
 		
 		System.out.println("==== TEST 6: expense update ====");
 		expense = expenseDao.findById(5);
-		expense.setName("café alterado");
-		expenseDao.update(expense);
+		//expense.setName("café alterado");
+		//expenseDao.update(expense);
 		System.out.println("Update completed");
 	}
 

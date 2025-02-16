@@ -68,10 +68,8 @@ public class App {
 							paymentMethodDao.insert(paymentMethod);
 							
 							paymentMethod = paymentMethodDao.findByName(paymentMethodInput);
-							
 							System.out.println("Novo Método de Pagamento adicionado " + paymentMethod.getName());
 						}
-						
 						
 						
 						System.out.println("Digite a categoria:");
@@ -85,9 +83,10 @@ public class App {
 							System.out.println("Nova categoria adicionada " + category1.getName_category());
 						}
 							
-						Expense newExpense = new Expense(null, name, new Date(), value, parcels, paymentoMethod, category1);
+						Expense newExpense = new Expense(null, name, new Date(), value, parcels, paymentMethod, category1);
 						expenseDao.insert(newExpense);
-						System.out.println("Inserted New in: " + newExpense.getName());
+						System.out.println("Despesa cadastrada: " + newExpense.getName());
+						
 						break;
 					case 2: 
 						System.out.println("Lista de Despesas");

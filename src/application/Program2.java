@@ -57,24 +57,32 @@ public class Program2 {
 		
 		System.out.println("==== TEST 4: delete ====");
 		System.out.println("category");
-		//categoryDao.deleteById(4);
+		categoryDao.deleteById(7);
+		categoryDao.deleteById(8);
+		categoryDao.deleteById(9);
+		categoryDao.deleteById(10);
+		categoryDao.deleteById(11);
 		System.out.println("Deleted!");
 		
 		System.out.println("payment method");
-		//paymentMethodDao.deleteById(4);
+		paymentMethodDao.deleteById(6);
+		paymentMethodDao.deleteById(7);
+		paymentMethodDao.deleteById(8);
+
+
 		System.out.println("Deleted!");
 		
 		System.out.println("==== TEST 5: update ====");
 		System.out.println("category");
 		category = categoryDao.findById(5);
 		category.setName_category("Home office");
-		categoryDao.update(category);
+		//categoryDao.update(category);
 		System.out.println("Update completed");
 		
 		System.out.println("payment method");
 		paymentMethod = paymentMethodDao.findById(5);
 		paymentMethod.setName("pix à vista");
-		paymentMethodDao.update(paymentMethod);
+		//paymentMethodDao.update(paymentMethod);
 		System.out.println("Update Completed");
 	}
 
